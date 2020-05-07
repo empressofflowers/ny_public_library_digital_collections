@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require "./lib/ny-public-library-digital-collections"
+
+NyPublicLibraryDigitalCollections::CLI.new.call
