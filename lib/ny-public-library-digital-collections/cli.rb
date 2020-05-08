@@ -1,64 +1,134 @@
 # My Controller.
+require 'pry'
 
 class NyPublicLibraryDigitalCollections::CLI
 
     def call
+        # A new instance of the NyPublicLibraryDigitalCollections:
         puts "Welcome to the New York Public Library: Digital Collections"
-        list_collections
+        puts ""
         collections_menu
-        print_poster
-        poster_menu
-        thanks_for_stopping_by
-    end 
-
-    def list_collections
-        puts "1. Poster Collection..."
-        #shows a list of the collections.
-        puts "Please enter the number of the collection you would like to view or type exit to go:"
-
     end
 
     def collections_menu
-        puts "Please enter the number of the collection you would like to view or type exit to go:"
-        #allows user to select the collection to view by number or exit.
         input = nil
         while input != "exit"
-            input = gets.strip.downcase 
+            puts "~~~~~WORK~~~~~~~"
+            puts "Collection 1"
+            puts "Collection 2"
+            puts "Collection 3"
+            puts "Collection 4"
+            puts "~~~~~~~~~~~~"
+            puts ""
+            puts "Enter the number of the collection you would like to view or 'exit':"
+            puts ""
+            input = gets.strip.downcase
+            case input 
+            when ("1".."4")
+                puts ""
+                posters_menu
+            else
+                puts ""
+                puts ""
+                puts "I can't do that."
+                puts ""
+                puts ""
+                puts ""
+                collections_menu
+            end
+        end
+        
+    end
+
+    
+    def posters_menu
+        input = nil
+        while input != "exit"
+            puts "Name of the Collection"
+            puts ""
+            puts "Enter a letter to view it's posters."
+            puts ""
+            puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+            puts "A - B - C - D -E - F - G - I -J - K - L - M - N" 
+            puts ""
+            puts "O - P - Q - R - S - T - U - V - W - X - Y - Z"
+            puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+            puts ""
+            puts ""
+            puts "|back| |/name of collection/| |exit|"
+            puts ""
+            input = gets.strip.downcase
             case input
-            when "1"
-                puts "First Collection"
-            when "2"
-                puts "Second Collection"
-            when "exit"
-                thanks_for_stopping_by
+            when ("a".."z")
+                #I think I'll need to create an alphabet range, that contains an array of
+                #all of the posters that start with that letter, within the instance of that collection.
+                puts ""
+                puts ""
+                print_posters_menu
+            when "back"
+                puts ""
+                puts ""
+                puts collections_menu
+            else 
+                puts ""
+                puts ""
+                puts "I can't do that."
+                puts ""
+                puts ""
+                puts ""
+                posters_menu
             end
         end
     end
 
-    def print_poster
-        #prints to screen image of the poster plus citations.
-        puts "This is a poster."
-    end
-    
-    def poster_menu #can this be refactored?
-        #allows user to enter < or > to cycle through images, home to return to main page, back to return to collection list or exit.
-        #if I can't figure out how to print to terminal, I'll provide a link to view in browser.
-        puts "Enter '<' to go back '>' to go forward or type 'exit' to go:"
+    def print_menu
         input = nil
         while input != "exit"
+            puts "@~*~@~*~@~*~@~*~@~*~@~*~@~*~@~*~@"
+            puts "This is a poster with citations." 
+            puts "@~*~@~*~@~*~@~*~@~*~@~*~@~*~@~*~@"
+            puts ""
+            puts "@~*~@~*~@~*~@~*~@~*~@~*~@~*~@~*~@"
+            puts "This is a poster with citations." 
+            puts "@~*~@~*~@~*~@~*~@~*~@~*~@~*~@~*~@"
+            puts ""
+            puts "@~*~@~*~@~*~@~*~@~*~@~*~@~*~@~*~@"
+            puts "This is a poster with citations." 
+            puts "@~*~@~*~@~*~@~*~@~*~@~*~@~*~@~*~@"
+            puts ""
+            puts "|<| |/name of collection/| |>|"
+            puts "|back| |collections| |exit|"
+            puts ""
             input = gets.strip.downcase
             case input
             when "<"
+                puts ""
                 puts "Previous Poster"
+                print_menu
             when ">"
+                puts ""
                 puts "Next Poster"
-            when "exit"
-                thanks_for_stopping_by
+                print_menu
+            when "collections"
+                puts ""
+                collections_menu
+            when "back"
+                puts ""
+                posters_menu
+            else
+                puts ""
+                puts ""
+                puts "I can't do that."
+                puts ""
+                puts ""
+                puts ""
+                print_menu
             end
         end
     end
-
-    def thanks_for_stopping_by
-        puts "Thanks for stopping by. Come back soon."
+    
+    def see_you_later
+        puts ""
+        puts "Thanks for stopping by. Comeback soon."
     end
 end
