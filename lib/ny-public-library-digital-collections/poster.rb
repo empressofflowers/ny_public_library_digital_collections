@@ -9,16 +9,17 @@ class NyPublicLibraryDigitalCollections::Poster
     @url = url
     @title = title
     @collection = collection
+    @@all << self
   end
 
   def self.all
     @@all
   end
 
-  def self.find_by_first_letter
-
-  end
-
+  #def find_by_first_letter(current_collection_posters)
+  #  current_collection_posters.select {|poster| poster.name.downcase.start_with?(letter)}
+  #end
+    
 
   #poster.title = name of the poster
   #poster.image = print to terminal the photo
