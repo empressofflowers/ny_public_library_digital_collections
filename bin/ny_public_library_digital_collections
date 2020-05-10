@@ -2,4 +2,4 @@
 
 require_relative "../lib/ny-public-library-digital-collections"
 
-NyPublicLibraryDigitalCollections::CLI.new.call
+NYPLDC::CLI.new.call

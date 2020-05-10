@@ -2,7 +2,7 @@ require 'pry'
 require 'nokogiri'
 require 'open-uri'
 
-class NyPublicLibraryDigitalCollections::Scraper
+class NYPLDC::Scraper
 
   url = "https://digitalcollections.nypl.org/collections/lane/poster-collections"
 
@@ -14,7 +14,7 @@ class NyPublicLibraryDigitalCollections::Scraper
     name = collection.search("h5").text
     quantity = collection.search("span.item-count").text
     url = collection.attr("href")
-    @collection = NyPublicLibraryDigitalCollections::Collection.new(name, quantity, url)
+    @collection = NYPLDC::Collection.new(name, quantity, url)
       #binding.pry
     #self.scrape_posters(@collection)  
     end
@@ -26,7 +26,7 @@ class NyPublicLibraryDigitalCollections::Scraper
   poster_a_tag_item.each do |poster| 
     title = poster.search("a").attr("alt").value
     url = poster.search("a").attr("href").value
-    NyPublicLibraryDigitalCollections::Poster.new(title, url, collection.name)
+    NYPLDC::Poster.new(title, url, collection.name)
     end
   end
 end

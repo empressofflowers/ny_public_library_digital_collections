@@ -1,6 +1,6 @@
 
 
-class NyPublicLibraryDigitalCollections::Collection
+class NYPLDC::Collection
   attr_accessor :name, :quantity, :url
 
   @@all = []
@@ -21,7 +21,7 @@ class NyPublicLibraryDigitalCollections::Collection
   end
 
   def posters
-    NyPublicLibraryDigitalCollections::Poster.all.find_all {|poster| poster.collection == self.name}
+    NYPLDC::Poster.all.find_all {|poster| poster.collection == self.name}
   end
 
 #binding.pry 

@@ -2,7 +2,7 @@
 
 #Gem::Specification.new do |spec|
 #  spec.name          = "ny_public_library_digital_collections_cli"
-#  spec.version       = NyPublicLibraryDigitalCollectionsCli::VERSION
+#  spec.version       = NYPLDC::VERSION
 #  spec.authors       = ["Devone L Austin"]
 #  spec.email         = ["devone.austin@gmail.com"]
 

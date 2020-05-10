@@ -1,6 +1,6 @@
 
 
-class NyPublicLibraryDigitalCollections::Poster
+class NYPLDC::Poster
   attr_accessor :title, :url, :collection
 
   @@all = []
