@@ -1,7 +1,7 @@
 
 
-class NYPLDC::Collection
-  attr_accessor :name, :quantity, :url
+class NYPLDC::Collections
+  attr_accessor :name, :quantity, :url, :posters
 
   @@all = []
   
@@ -9,7 +9,17 @@ class NYPLDC::Collection
     @name = name
     @quantity = quantity
     @url = url
+    @posters = []
     @@all << self
+  end
+
+  def posters
+    NYPLDC::Posters.select {|poster| poster.collection = self}
+  end
+
+  def add_poster
+   new_poster = NYPLDC::Posters.new(title, url)
+   posters << new_poster
   end
 
   def self.all
@@ -20,8 +30,8 @@ class NYPLDC::Collection
     @@all[id-1]
   end
 
-  def posters
-    NYPLDC::Poster.all.find_all {|poster| poster.collection == self.name}
+  def self.print_collections
+    @@all.map {|collection, index| puts "#{index}.#{collection.name.upcase},-#{collection.quantity}"}
   end
 
 #binding.pry 

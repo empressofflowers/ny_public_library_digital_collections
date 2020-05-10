@@ -10,16 +10,17 @@ class  NYPLDC::CLI
     puts ">> Welcome to the New York Public Library: Digital Collections <<"
     puts ""
     collections_menu
-    #see_you_later
   end
 
-  def collections_menu
+### Need to fix my loop. It won't exit from home once you've been in different menus, but when you return home from the posters menu, you can select a new collection and view those posters.
+
+  def collections_menu(input=nil)
 
     puts ""
     puts "~~~~~~~~~~~~~Poster Collections~~~~~~~~~~~~~~~"
     puts ""
 
-    NYPLDC::Collection.all.each_with_index {|collection, index| puts "#{index+1}.#{collection.name.upcase}"}
+    NYPLDC::Collections.print_collections
 
     puts ""
     puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
@@ -31,26 +32,26 @@ class  NYPLDC::CLI
     puts ""
 
     input = gets.strip
-    case input 
-    when ("1".."21")
-      puts ""
-      posters_menu(input)
-    when "exit"
-      see_you_later
-    else
-      puts ""
-      puts ""
-      puts "I can't do that. Please, try again."
-      puts ""
-      puts ""
+    while input != 'exit'
+      case input 
+      when ("1".."21")
+        puts ""
+        posters_menu(NYPLDC::Collections.all[input.to_i-1])
+      end
+
+      if input == "exit"
+        puts "Thanks for stopping by. Comeback soon." 
+        break
+        #The message doens't display, but it exits, and only when you haven't alerady viewed a list of posters. If you have,it displays the exit message(?) then gives you the poster menu for the most recent collection of posters.
+      end
     end
   end
 
-  def posters_menu(input)
+  ### After the you select a collection, you should move on to the next method, that displays a list of letters that you cen enter to view that posters that begin with that letter. If it's empty, nothing should return.
 
-    current_collection =  NYPLDC::Collection.find(input.to_i)
+  def posters_menu(current_collection)
     NYPLDC::Scraper.scrape_posters(current_collection)
-    current_collection_posters = current_collection.posters
+    #current_collection_posters = current_collection.posters
 
     puts ""
     puts ""
@@ -64,40 +65,18 @@ class  NYPLDC::CLI
     puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     puts "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
     puts ""
-    puts "|'home'|  |'back'|  |#{current_collection.name.upcase}|  |'exit'|"
+    puts "|'home'| |#{current_collection.name.upcase}| |'exit'|"
     puts ""
     puts "Enter a letter to view."
     puts ""
     puts ""
 
-    while input != "exit"
     input = gets.strip.downcase
+    while input != "exit"
       case input
-      when ("a".."z")
-        def find_by_first_letter(posters, input)
-          posters.select {|poster| poster.title.downcase.start_with?(input)}
-        end
-        posters_by_letter = find_by_first_letter(current_collection_posters, input)
-
+      when ("a".."z")   
         puts ""
-        puts ""
-        puts ""
-
-        print_posters(posters_by_letter)
-      
-        puts ""
-        puts ""
-        puts "|'home'|  |'back'|  |#{current_collection.name}|  |'exit'|"
-        puts ""
-
-      when "back"
-        puts ""
-        puts ""
-
-        posters_menu(input)
-
-        puts ""
-        puts ""
+        posters_list(NYPLDC::Posters.find_by_first_letter(input)) 
       when "home"
         puts ""
         puts ""
@@ -106,87 +85,39 @@ class  NYPLDC::CLI
 
         puts ""
         puts ""
-
-      when "exit"
-        puts ""
-        see_you_later
-        puts ""
-      else 
-        puts ""
-        puts ""
-        puts "I can't do that. Please, try again."
-        puts ""
-        puts ""
-        puts ""
+      when input == 'exit'
+        break
       end
     end
   end
 
-  # def posters
-
-    # def find_by_first_letter(posters, input)
-    #   posters.select {|poster| poster.title.downcase.start_with?(input)}
-    # end
-    # posters_by_letter = find_by_first_letter(current_collection_posters, input)
-
-    # puts ""
-    # puts ""
-    # puts ""
-
-    # print_posters(posters_by_letter)
-
-    # puts ""
-    # puts ""
-    # puts "|'home'|  |'back'|  |#{current_collection.name}|  |'exit'|"
-    # puts ""
-
-  #   input = nil
-  #   while input != "exit"
-  #     input = gets.strip.downcase
-  #     case input
-  #     when "back"
-      #   puts ""
-      #   puts ""
-
-      #   posters_menu(input)
-
-      #   puts ""
-      #   puts ""
-      # when "home"
-      #   puts ""
-      #   puts ""
-
-      #   collections_menu
-
-      #   puts ""
-      #   puts ""
-
-      # when "exit"
-      #   puts ""
-      #   see_you_later
-      #   puts ""
-      # else 
-      #   puts ""
-      #   puts ""
-      #   puts "I can't do that. Please, try again."
-      #   puts ""
-      #   puts ""
-      #   puts ""
-  #     end
-  #   end
-  # end
-
-  def print_posters (posters)
-    posters.each_with_index do |poster, index| 
-      puts "#{index+1}. #{poster.title.capitalize}" 
-      puts "https://digitalcollections.nypl.org#{poster.url}"
-      end
-  end
-
-  def see_you_later
+  def posters_list(current_posters)
     puts ""
-    puts "Thanks for stopping by. Comeback soon."
-  end
+    puts ""
+    puts ""
 
-    
+    NYPLDC::Posters.sprint_posters
+
+    puts ""
+    puts ""
+    puts "|'home'| |#{current_collection.name.upcase}|  |'exit'|"
+    puts ""
+    puts "Enter a letter to view a new list."
+    puts ""
+
+    input = gets.strip
+    while input != 'exit'
+      case input 
+      when ("1".."21")
+        puts ""
+        posters_menu(NYPLDC::Collections.all[input.to_i-1])
+      end
+
+      if input == "exit"
+        puts "Thanks for stopping by. Comeback soon." 
+        break
+      end
+    end
+
+  end
 end
