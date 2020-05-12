@@ -26,8 +26,6 @@ class NYPLDC::Controller
     input = gets.chomp.to_i
     if (1..21).include?(input)
       puts ""
-      puts "Fetching your posters. Please wait."
-      puts ""
       puts ""
       NYPLDC::Scraper.scrape_posters(input)
      # binding.pry
@@ -42,13 +40,13 @@ class NYPLDC::Controller
   # I would like to always display what collection you're in and display them 10 at a time with an option to go to the next set.
   # I would love to figure out the loops to make proper menus, but this all works!
 
-  def prompt_to_view_poster_another_collection_or_exit
+  def prompt_to_view_poster_or_exit
     puts ""
     puts ""
     puts "To view a poster, hold command and click the link or 'exit'."
     puts ""
 
-  # Only displays up 50 posters. Maybe not scraping all of them? Was having gateway errors before.
+  # Only displays up to 50 posters. Not sure why? Was having gateway 502 errors before.
 
     input = gets.chomp.downcase
     if input == "exit"
@@ -57,7 +55,7 @@ class NYPLDC::Controller
     else 
       puts ""
       puts "Please try again."
-      prompt_to_view_poster_another_collection_or_exit
+      prompt_to_view_poster_or_exit
     end
   end
 
@@ -69,6 +67,6 @@ class NYPLDC::Controller
     NYPLDC::Scraper.scrape_collections
     welcome
     display_collection_and_posters
-    prompt_to_view_poster_another_collection_or_exit
+    prompt_to_view_poster_or_exit
   end
 end
