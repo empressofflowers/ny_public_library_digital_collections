@@ -1,6 +1,6 @@
 # NyPublicLibraryDigitalCollectionsCli
 
-A random selection of posters from the Poster Collection of the New York Public Library Digital Collections.
+This CLI scrapes the New York Public Library: Digital Collections, Poster Collection, lists all of the collections and the posters associated with each. You can view the posters the collection by following the link in your browser.
 
 ## Installation
 
@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Can be used to select and view collections of posters from the NYPLDC website.
 
 ## Development
 
@@ -30,7 +30,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/ny_public_library_digital_collections_cli.
+Bug reports and pull requests are welcome on GitHub at https://github.com/empressofflowers/ny_public_library_digital_collections_cli.
 
 
 ## License
