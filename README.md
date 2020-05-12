@@ -1,6 +1,6 @@
 # NyPublicLibraryDigitalCollectionsCli
 
-This CLI scrapes the New York Public Library: Digital Collections, Poster Collection, lists all of the collections and the posters associated with each. You can view the posters the collection by following the link in your browser.
+This CLI scrapes the New York Public Library: Digital Collections, Poster Collection, lists all of the collections and the posters associated with each. You can view the posters in each collection by following the link in your browser.
 
 ## Installation
 
