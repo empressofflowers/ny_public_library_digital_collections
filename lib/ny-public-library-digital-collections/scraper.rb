@@ -9,11 +9,11 @@ class NYPLDC::Scraper
   page = Nokogiri::HTML(open(url))
   collection_a_tag_grid_items = page.css("a.grid-item")
   collection_a_tag_grid_items.each do |collection|
-    info = {
+    attr_hash = {
     :name => collection.search("h5").text,
     :quantity => collection.search("span.item-count").text,
     :link => collection.attr("href")}
-    new_collection = NYPLDC::Collection.new(info)
+    new_collection = NYPLDC::Collection.new(attr_hash)
     end
   end
 
@@ -22,9 +22,10 @@ class NYPLDC::Scraper
   page = Nokogiri::HTML(open(collection.link))
   poster_a_tag_item = page.css("div.description")
   poster_a_tag_item.each do |poster| 
-    title = poster.search("a").attr("alt").value
-    link = poster.search("a").attr("href").value
-    NYPLDC::Poster.new(title, link, collection.name)
+    attr_hash = {
+    :title => poster.search("a").attr("alt").value,
+    :link => poster.search("a").attr("href").value}
+    NYPLDC::Poster.new(attr_hash)
     end
   end
 end

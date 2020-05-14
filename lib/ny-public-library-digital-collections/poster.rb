@@ -5,7 +5,7 @@ class NYPLDC::Poster
 
   @@all = []
 
-  def initialize title=nil, link=nil, collection=nil
+  def initialize title=nil, link=nil
     @link = link
     @title = title
     @collection = collection

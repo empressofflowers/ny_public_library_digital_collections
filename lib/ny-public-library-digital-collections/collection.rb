@@ -5,7 +5,7 @@ class NYPLDC::Collection
 
   @@all = []
   
-  def initialize info
+  def initialize attr_hash
     info.each {|key, value| self.send("#{key}=", value)}
     @@all << self
   end
