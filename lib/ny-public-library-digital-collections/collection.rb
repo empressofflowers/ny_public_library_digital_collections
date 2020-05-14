@@ -3,17 +3,15 @@
 class NYPLDC::Collection
   attr_accessor :name, :quantity, :link, :posters
 
-  @@collections = []
+  @@all = []
   
-  def initialize name, quantity, link
-    @name = name
-    @quantity = quantity
-    @link = link
-    @@collections << self
+  def initialize info
+    info.each {|key, value| self.send("#{key}=", value)}
+    @@all << self
   end
 
   def self.all
-    @@collections
+    @@all
   end
 
   def posters
@@ -21,11 +19,11 @@ class NYPLDC::Collection
   end
 
   def self.find(id)
-    @@collections.find(id)
+    @@all.find(id)
   end
 
   def self.print_collections_with_index
-    @@collections.each_with_index {|collection, index|
+    @@all.each_with_index {|collection, index|
       puts "#{index+1}.#{collection.name.upcase}: #{collection.quantity}"}
   end
 

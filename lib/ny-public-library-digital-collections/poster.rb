@@ -3,21 +3,21 @@
 class NYPLDC::Poster
   attr_accessor :title, :link, :collection
 
-  @@posters = []
+  @@all = []
 
   def initialize title=nil, link=nil, collection=nil
     @link = link
     @title = title
     @collection = collection
-    @@posters << self
+    @@all << self
   end
 
   def self.all
-    @@posters
+    @@all
   end
 
   def self.print_posters_with_index
-    @@posters.each_with_index do |poster, index| poster.collection == self
+    @@all.each_with_index do |poster, index| poster.collection == self
       puts "#{index+1}. #{poster.title.upcase}" 
       puts "https://digitalcollections.nypl.org#{poster.link}"
     end
