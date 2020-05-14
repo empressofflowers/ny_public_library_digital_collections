@@ -3,16 +3,21 @@
 class NYPLDC::Collection
   attr_accessor :name, :quantity, :link, :posters
 
+  include Concerns::InstanceMethod
+  extend Concerns::ClassMethod
+
   @@all = []
   
-  def initialize attr_hash
-    info.each {|key, value| self.send("#{key}=", value)}
-    @@all << self
-  end
+  #Want to make sure I'm extending/including the concerns correctly.
 
-  def self.all
-    @@all
-  end
+  # def initialize attr_hash
+  #   info.each {|key, value| self.send("#{key}=", value)}
+  #   @@all << self
+  # end
+
+  # def self.all
+  #   @@all
+  # end
 
   def posters
     NYPLDC::Poster.all.select {|poster| poster.collection == self}

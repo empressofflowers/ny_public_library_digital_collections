@@ -3,18 +3,23 @@
 class NYPLDC::Poster
   attr_accessor :title, :link, :collection
 
+  include Concerns::InstanceMethod
+  extend Concerns::ClassMethod
+
   @@all = []
 
-  def initialize title=nil, link=nil
-    @link = link
-    @title = title
-    @collection = collection
-    @@all << self
-  end
+#Want to make sure I'm extending/including the concerns correctly.
 
-  def self.all
-    @@all
-  end
+  # def initialize title=nil, link=nil
+  #   @link = link
+  #   @title = title
+  #   @collection = collection
+  #   @@all << self
+  # end
+
+  # def self.all
+  #   @@all
+  # end
 
   def self.print_posters_with_index
     @@all.each_with_index do |poster, index| poster.collection == self
