@@ -1,7 +1,7 @@
 ### The Single Source of Truth
 
 class NYPLDC::Collection
-  attr_accessor :name, :quantity, :link, :posters
+   attr_accessor :name, :quantity, :link, :posters
 
   include Concerns::InstanceMethod
   extend Concerns::ClassMethod

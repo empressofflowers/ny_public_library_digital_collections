@@ -14,6 +14,7 @@ class NYPLDC::Controller
   def display_collection_and_posters
     puts "~~~~~~~~~~~~~~~~~~~~~Poster Collections~~~~~~~~~~~~~~~~~~~~~~~~~"
     puts ""
+    #Now my printer isn't working. Have to check the method in the Collection Class.
     NYPLDC::Collection.print_collections_with_index
     puts ""
     puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
@@ -33,7 +34,7 @@ class NYPLDC::Controller
     else
       puts ""
       puts "Please try again."
-      display_and_select_collection
+      display_collection_and_posters
     end
   end
 

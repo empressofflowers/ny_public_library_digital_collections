@@ -22,7 +22,7 @@ class NYPLDC::Poster
   # end
 
   def self.print_posters_with_index
-    @@all.each_with_index do |poster, index| poster.collection == self
+    all.each_with_index do |poster, index| poster.collection == self
       puts "#{index+1}. #{poster.title.upcase}" 
       puts "https://digitalcollections.nypl.org#{poster.link}"
     end
