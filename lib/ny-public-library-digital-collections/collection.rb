@@ -32,13 +32,4 @@ class NYPLDC::Collection
       puts "#{index+1}.#{collection.name.upcase}: #{collection.quantity}"}
   end
 
-#binding.pry 
-
-  # collection.name = name of the collection
-  # collection.posters = posters that belong to an instance of a collection
-  # Collection.new = a new instance of a collection
-  # Collection.all = all of the collections
-  # Collection.find = find a collection by it's id
-  # collection.url = link to the collection
-  # Collection.print = prints to terminal a collection
 end
