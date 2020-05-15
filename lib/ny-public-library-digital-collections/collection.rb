@@ -1,23 +1,23 @@
 ### The Single Source of Truth
 
 class NYPLDC::Collection
-   attr_accessor :name, :quantity, :link, :posters
+  attr_accessor :name, :quantity, :link, :posters
 
-  include Concerns::InstanceMethod
-  extend Concerns::ClassMethod
+  # Don't have the time right now to figure out how to refactor this with the concerns.
+
+  # include Concerns::InstanceMethod
+  # extend Concerns::ClassMethod
 
   @@all = []
-  
-  #Want to make sure I'm extending/including the concerns correctly.
 
-  # def initialize attr_hash
-  #   info.each {|key, value| self.send("#{key}=", value)}
-  #   @@all << self
-  # end
+  def initialize attr_hash
+    attr_hash.each {|key, value| self.send("#{key}=", value)}
+    @@all << self
+  end
 
-  # def self.all
-  #   @@all
-  # end
+  def self.all
+    @@all
+  end
 
   def posters
     NYPLDC::Poster.all.select {|poster| poster.collection == self}

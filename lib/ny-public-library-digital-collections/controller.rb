@@ -2,7 +2,7 @@
 
 class NYPLDC::Controller
 
-  attr_accessor :input
+  attr_accessor :input # <---- Without this, I automatically get a 502 bad gateway error.
 
   def welcome
     puts ""
@@ -14,7 +14,6 @@ class NYPLDC::Controller
   def display_collection_and_posters
     puts "~~~~~~~~~~~~~~~~~~~~~Poster Collections~~~~~~~~~~~~~~~~~~~~~~~~~"
     puts ""
-    #Now my printer isn't working. Have to check the method in the Collection Class.
     NYPLDC::Collection.print_collections_with_index
     puts ""
     puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
@@ -28,8 +27,7 @@ class NYPLDC::Controller
     if (1..21).include?(input)
       puts ""
       puts ""
-      NYPLDC::Scraper.scrape_posters(input)
-     # binding.pry
+      NYPLDC::Scraper.scrape_posters(input) # <---- Getting bad gateway 502 errors depending on which collection I'm scraping.
       NYPLDC::Poster.print_posters_with_index
     else
       puts ""
@@ -46,8 +44,6 @@ class NYPLDC::Controller
     puts ""
     puts "To view a poster, hold command and click the link or 'exit'."
     puts ""
-
-  # Only displays up to 50 posters. Not sure why? Was having gateway 502 errors before.
 
     input = gets.chomp.downcase
     if input == "exit"
