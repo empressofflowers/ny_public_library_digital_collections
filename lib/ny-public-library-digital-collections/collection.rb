@@ -11,7 +11,7 @@ class NYPLDC::Collection
   @@all = []
 
   def initialize attr_hash
-    attr_hash.each {|key, value| self.send("#{key}=", value)}
+    attr_hash.each {|attribute, value| self.send("#{attribute}=", value)}
     @@all << self
   end
 
@@ -25,11 +25,6 @@ class NYPLDC::Collection
 
   def self.find(id)
     @@all.find(id)
-  end
-
-  def self.print_collections_with_index
-    @@all.each_with_index {|collection, index|
-      puts "#{index+1}.#{collection.name.upcase}: #{collection.quantity}"}
   end
 
 end

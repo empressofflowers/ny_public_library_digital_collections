@@ -1,8 +1,6 @@
 
-
+require 'pry'
 class NYPLDC::Controller
-
-  attr_accessor :input # <---- Without this, I automatically get a 502 bad gateway error.
 
   def welcome
     puts ""
@@ -14,7 +12,9 @@ class NYPLDC::Controller
   def display_collection_and_posters
     puts "~~~~~~~~~~~~~~~~~~~~~Poster Collections~~~~~~~~~~~~~~~~~~~~~~~~~"
     puts ""
-    NYPLDC::Collection.print_collections_with_index
+    NYPLDC::Collection.all.each_with_index do |collection, index|
+      puts "#{index+1}.#{collection.name.upcase}: #{collection.quantity}"
+    end
     puts ""
     puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     puts ""
@@ -28,7 +28,10 @@ class NYPLDC::Controller
       puts ""
       puts ""
       NYPLDC::Scraper.scrape_posters(input) # <---- Getting bad gateway 502 errors depending on which collection I'm scraping.
-      NYPLDC::Poster.print_posters_with_index
+      NYPLDC::Poster.all.each_with_index do |poster, index| poster.collection == self
+        puts "#{index+1}. #{poster.title.upcase}" 
+        puts "https://digitalcollections.nypl.org#{poster.link}"
+      end    
     else
       puts ""
       puts "Please try again."
@@ -46,7 +49,7 @@ class NYPLDC::Controller
     puts ""
 
     input = gets.chomp.downcase
-    if input == "exit"
+    if "exit"
       puts ""
       see_you_later
     else 

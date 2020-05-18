@@ -8,10 +8,18 @@ class NYPLDC::Poster
   # include Concerns::InstanceMethod
   # extend Concerns::ClassMethod
 
+  def title= title
+    @title = title
+  end
+
+  def title
+    @title
+  end
+
   @@all = []
 
   def initialize attr_hash # <--- Forgot to add mass assignment here. Still only returns up to 50 posts.
-    attr_hash.each {|key, value| self.send("#{key}=", value)}
+    attr_hash.each {|attribute, value| self.send("#{attribute}=", value)}
     @@all << self
   end
 
@@ -19,10 +27,4 @@ class NYPLDC::Poster
     @@all
   end
 
-  def self.print_posters_with_index
-    @@all.each_with_index do |poster, index| poster.collection == self
-      puts "#{index+1}. #{poster.title.upcase}" # <----- After adding mass assingment in this class, it recognizes the key, value pairs.
-      puts "https://digitalcollections.nypl.org#{poster.link}"
-    end
-  end
 end
