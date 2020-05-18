@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require_relative "../lib/ny-public-library-digital-collections"
+require "./lib/ny-public-library-digital-collections"
 
 NYPLDC::Controller.new.run
